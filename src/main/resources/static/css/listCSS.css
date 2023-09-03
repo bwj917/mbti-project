@@ -1,0 +1,289 @@
+/* MBTI 유형 버튼 */
+@import url("https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap");
+
+* {
+    margin: auto;
+    box-sizing: border-box;
+}
+
+#button {
+    position: relative;
+    text-align: center;
+}
+
+.w-btn {
+    position: relative;
+    border: none;
+    display: inline-block;
+    padding: 15px 30px;
+    border-radius: 15px;
+    font-family: "paybooc-Light", sans-serif;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+}
+
+.w-btn-outline {
+    position: relative;
+    padding: 15px 30px;
+    border-radius: 15px;
+    font-family: "paybooc-Light", sans-serif;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+}
+
+.w-btn-indigo {
+    background-color: aliceblue;
+    color: #1e6b7b;
+}
+
+.w-btn-indigo-outline {
+    border: 3px solid aliceblue;
+    color: #1e6b7b;
+}
+
+.w-btn-indigo-outline:hover {
+    color: #1e6b7b;
+    background: aliceblue;
+}
+
+.w-btn:hover {
+    letter-spacing: 2px;
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+.w-btn-outline:hover {
+    letter-spacing: 2px;
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+.w-btn:active {
+    transform: scale(1.5);
+}
+
+.w-btn-outline:active {
+    transform: scale(1.5);
+}
+
+.w-btn-gra-anim {
+    background-size: 400% 400%;
+    animation: gradient1 5s ease infinite;
+}
+
+@keyframes gradient1 {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes gradient2 {
+    0% {
+        background-position: 100% 50%;
+    }
+    50% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+@keyframes ring {
+    0% {
+        width: 30px;
+        height: 30px;
+        opacity: 1;
+    }
+    100% {
+        width: 300px;
+        height: 300px;
+        opacity: 0;
+    }
+}
+
+.w-btn-neon2 {
+    position: relative;
+    border: none;
+    min-width: 200px;
+    min-height: 50px;
+    background: linear-gradient(
+            90deg,
+            rgba(129, 230, 217, 1) 0%,
+            rgba(79, 209, 197, 1) 100%
+    );
+    border-radius: 1000px;
+    color: darkslategray;
+    cursor: pointer;
+    box-shadow: 12px 12px 24px rgba(79, 209, 197, 0.64);
+    font-weight: 700;
+    transition: 0.3s;
+}
+
+.w-btn-neon2:hover {
+    transform: scale(1.2);
+}
+
+.w-btn-neon2:hover::after {
+    content: "";
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    border: 6px solid #00ffcb;
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: ring 1.5s infinite;
+}
+
+/* 필요 부분*/
+body{
+    /*text-align: center;*/
+    padding: 300px;
+    background-color: #fff;
+    display: table-cell;
+    min-width:1024px;
+}
+#list-section{
+    width: 710px;
+    border: 2px;
+    box-sizing: border-box;
+    margin: auto;
+}
+h1,h2,p{text-align: center}
+h1{font-size: 2em}
+
+#list-aside{
+    position: fixed;
+    margin-left: 20%;
+    padding: 60px 16px;
+    width: 500px;
+    height: 500px;
+
+}
+
+/*사이드 메뉴*/
+.menu ::before{
+    font-family: 'Material Icons';
+    font-size: 1.5em;
+    float: left;
+    clear: left;
+}
+.menu label::before{ content: '\e5d2'; }
+.menu li:nth-child(1) a::before{ content: '\f02e'; }
+.menu li:nth-child(2) a::before{ content: '\e8d6'; }
+.menu li:nth-child(3) a::before{ content: '\e87d'; } /*\e88a*/
+.menu li:nth-child(4) a::before{ content: '\e8cc'; } /*e8b8*/
+
+
+#expand-menu { /* 체크박스 폼 요소 감춤 */
+    display: none;
+}
+#expand-menu:checked ~ ul { /* 체크박스 체크되었으면 메뉴 목록 표시 - 반응형 표시용 */
+    display: block;
+    height: auto;
+}
+.menu {
+    display: block;
+    width: 200px;
+    background-color: #000;
+    color: #fff;
+    border-radius: 20px;
+    padding: 10px;
+    box-sizing: border-box;
+    overflow: hidden; /* 반응형 애니메이션용 */
+    transition: all 0.5s ease; /* 반응형 애니메이션 */
+}
+.menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.menu a, .menu > label {
+    display: block;
+    height: 25px;
+    padding: 8px;
+    cursor: pointer;
+    color: #fff;
+    text-decoration: none;
+}
+.menu a:hover {
+    color: #000;
+}
+.menu ul li:hover, .menu > label:hover {
+    background-color: #fff;
+    color: #000;
+    border-radius: 10px;
+}
+
+.menu div {
+    line-height: 1.5;
+    font-size: 1em;
+    font-family: 'Noto Sans KR';
+    padding: 0 0 0 50px; /* 아이콘과 텍스트 사이 여백 */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+table td {
+    text-align: center;
+    padding: 10px;
+    width: 200px;
+    height: 500px;
+}
+img {
+    width: 175px;
+    height: 250px;
+}
+.list-info {
+    width: 200px;
+    text-align: center;
+}
+.a{
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    line-height: 1.8;
+    overflow: hidden;
+}
+.box{
+    content: "";
+    z-index: 2;
+    /*position: absolute;*/
+    /*top: 172px;*/
+    left: 0;
+    right: 0;
+    height: 14px;
+    box-sizing: border-box;
+    border-top: 1px solid #e6c46d; !important;
+    border-bottom: 1px solid #e6c46d; !important;
+    background-color: #9f7e61; !important;
+}
+
+.movie-box{
+    content: "";
+    z-index: 2;
+    /*position: absolute;*/
+    /*top: 172px;*/
+    left: 0;
+    right: 0;
+    height: 14px;
+    box-sizing: border-box;
+    border-top: 1px solid #e6c46d; !important;
+    border-bottom: 1px solid #e6c46d; !important;
+    background-color: #9f7e61; !important;
+}

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mbti.demo.mybatis.BestBookMapper">
+
+
+    <select id="findAll" resultType="BestBook">
+        select 순위 as rank,
+               제목 as title,
+               사진 as img,
+               작가 as author,
+               가격 as price,
+               정보 as description,
+               링크 as link
+        from best_book
+        order by 순위 asc
+    </select>
+
+
+
+</mapper>

@@ -1,0 +1,31 @@
+ul li{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+}
+.dropdown-menu {
+    font:bold 16px "malgun gothic"; !important;
+    width:700px;
+    height:50px;
+    /*background: #ccc;*/
+    color:black;
+    line-height: 50px;
+    margin:0 auto;
+    text-align: center;
+    display: none;
+    position: absolute;
+    /* Additional styles for positioning, animation, etc. */
+}
+
+/* Show the dropdown when the parent menu item is hovered */
+.nav-item.dropdown:hover .dropdown-menu {
+    width:100px;
+    display: block;
+    position: absolute;
+    font-size:14px;
+}
+.dropdown-menu > ul>li:hover{
+    background: white;
+    transition: ease 1s;
+}

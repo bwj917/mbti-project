@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+	<title>Timeline</title>
+	<link rel="stylesheet" href="css/main.min.css" th:href="@{/css/main.min.css}">
+	<link rel="stylesheet" href="css/style.css"  th:href="@{/css/style.css}">
+	<link rel="stylesheet" href="css/color.css"  th:href="@{/css/color.css}">
+	<link rel="stylesheet" href="css/responsive.css"  th:href="@{/css/reponsive.css}">
+
+</head>
+<body>
+<!--<div class="se-pre-con"></div>-->
+<div class="theme-layout">
+	<section>
+		<div class="feature-photo">
+			<figure><img src="/images/resources/timeline.png" alt="" style="height: 400px"></figure>
+<!--			<div class="add-btn">-->
+<!--				<span>1205 followers</span>-->
+<!--				<a href="#" title="" data-ripple="">Add Friend</a>-->
+<!--			</div>-->
+			<form class="edit-phto">
+				<i class="fa fa-camera-retro"></i>
+				<label class="fileContainer">
+					Edit Cover Photo
+				<input type="file"/>
+				</label>
+			</form>
+			<div class="container-fluid">
+				<div class="row merged">
+					<div class="col-lg-2 col-sm-3">
+						<div class="user-avatar">
+							<figure>
+								<img src="/images/resources/user.png" alt="">
+								<form class="edit-phto">
+									<i class="fa fa-camera-retro"></i>
+									<label class="fileContainer">
+										Edit Display Photo
+										<input type="file"/>
+									</label>
+								</form>
+							</figure>
+						</div>
+					</div>
+					<div class="col-lg-10 col-sm-9">
+						<div class="timeline-info">
+							<ul>
+								<li class="admin-name">
+								  <h5 th:href = "${session.loginMember.getLoginId()}">CY</h5>
+								  <span th:href = "${session.loginMember.getMbti()}">INFP</span>
+								</li>
+								<li>
+									<a class="active" href="timeline.html" title="" data-ripple="">time line</a>
+<!--									<a class="" href="timeline-photos.html" title="" data-ripple="">Photos</a>-->
+<!--									<a class="" href="timeline-videos.html" title="" data-ripple="">Videos</a>-->
+									<a class="" href="timeline-friends.html" title="" data-ripple="">Friends</a>
+									<a class="" href="timeline-groups.html" title="" data-ripple="">Groups</a>
+<!--									<a class="" href="about.html" title="" data-ripple="">about</a>-->
+<!--									<a class="" href="#" title="" data-ripple="">more</a>-->
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section><!-- top area -->
+		
+	<section>
+		<div class="gap gray-bg">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="row" id="page-contents">
+							<div class="col-lg-3">
+								<aside class="sidebar static">
+									<div class="widget">
+										<h4 class="widget-title"></h4>
+										<ul class="naves">
+											<li>
+												<i class="ti-clipboard"></i>
+												<a href="index_login.html" title="" th:href="@{/templates/community}">게시물</a>
+											</li>
+											<li>
+												<i class="ti-files"></i>
+												<a href="../member/mypage.html" title="">내 게시물</a>
+											</li>
+											<li>
+												<i class="ti-comments-smiley"></i>
+												<a href="messages.html" title="">메세지</a>
+											</li>
+											<li>
+												<i class="ti-user"></i>
+												<a href="timeline-friends.html" title="">친구</a>
+											</li>
+											<li>
+												<i class="ti-share"></i>
+												<a href="people-nearby.html" title="">동네친구</a>
+											</li>
+										</ul>
+									</div><!-- Shortcuts -->
+									<div class="widget">
+										<h4 class="widget-title">Recent Activity</h4>
+										<ul class="activitiez">
+											<li>
+												<div class="activity-meta">
+													<i>10 hours Ago</i>
+													<span><a href="#" title="">Commented on Video posted </a></span>
+													<h6>by <a href="newsfeed.html">black demon.</a></h6>
+												</div>
+											</li>
+											<li>
+												<div class="activity-meta">
+													<i>30 Days Ago</i>
+													<span><a href="newsfeed.html" title="">Posted your status. “Hello guys, how are you?”</a></span>
+												</div>
+											</li>
+											<li>
+												<div class="activity-meta">
+													<i>2 Years Ago</i>
+													<span><a href="#" title="">Share a video on her timeline.</a></span>
+													<h6>"<a href="newsfeed.html">you are so funny mr.been.</a>"</h6>
+												</div>
+											</li>
+										</ul>
+									</div><!-- recent activites -->
+									<div class="widget stick-widget">
+										<h4 class="widget-title">Who's follownig</h4>
+										<ul class="followers">
+											<li>
+												<figure><img src="images/resources/user2.png" alt=""></figure>
+												<div class="friend-meta">
+													<h4><a href="" title="">인싸</a></h4>
+													<a href="#" title="" class="underline">Add Friend</a>
+												</div>
+											</li>
+										</ul>
+									</div><!-- who's following -->
+								</aside>
+							</div><!-- sidebar -->
+							<div class="col-lg-6">
+								<div class="loadMore">
+<!--									<div class="central-meta item">-->
+<!--										<div class="new-postbox">-->
+<!--											<figure>-->
+<!--												<img src="/images/resources/user.png" alt="">-->
+<!--											</figure>-->
+<!--											<div class="newpst-input">-->
+<!--												<form method="post">-->
+<!--													<textarea rows="2" placeholder=""></textarea>-->
+<!--													<div class="attachments">-->
+<!--														<ul>-->
+<!--															<li>-->
+<!--																<i class="fa fa-music"></i>-->
+<!--																<label class="fileContainer">-->
+<!--																	<input type="file">-->
+<!--																</label>-->
+<!--															</li>-->
+<!--															<li>-->
+<!--																<i class="fa fa-image"></i>-->
+<!--																<label class="fileContainer">-->
+<!--																	<input type="file">-->
+<!--																</label>-->
+<!--															</li>-->
+<!--															<li>-->
+<!--																<i class="fa fa-video-camera"></i>-->
+<!--																<label class="fileContainer">-->
+<!--																	<input type="file">-->
+<!--																</label>-->
+<!--															</li>-->
+<!--															<li>-->
+<!--																<i class="fa fa-camera"></i>-->
+<!--																<label class="fileContainer">-->
+<!--																	<input type="file">-->
+<!--																</label>-->
+<!--															</li>-->
+<!--															<li>-->
+<!--																<button type="submit">Publish</button>-->
+<!--															</li>-->
+<!--														</ul>-->
+<!--													</div>-->
+<!--												</form>-->
+<!--											</div>-->
+<!--										</div>-->
+<!--									</div>&lt;!&ndash; add post new box &ndash;&gt;-->
+									<div class="central-meta item">
+										<div class="user-post">
+											<div class="friend-info">
+												<figure>
+													<img src="/images/resources/user.png" alt="">
+												</figure>
+												<div class="friend-name">
+													<ins><a href="" title="" th:href = "${session.loginMember.getLoginId()}">CY</a></ins>
+													<span>published:2023/08/15</span>
+												</div>
+												<div class="post-meta">
+<!--													<img src="/images/resources/user-post.jpg" alt="">-->
+													<div class="description">
+														<p>
+															<a href="#" title="">#INFP!</a> 나 고민이 있는데 들어줄 사람! 내 친구는 나랑 MBTI가 완전 정반대라서 이해를 못해줌,, 그래서 나 이해해줄 사람 찾고 있음ㅠㅠ
+														</p>
+													</div>
+													<div class="we-video-info">
+														<ul>
+															<li>
+<!--															<span class="views" data-toggle="tooltip" title="views">-->
+<!--																<i class="fa fa-eye"></i>-->
+<!--																<ins>1.2k</ins>-->
+<!--															</span>-->
+															</li>
+															<li>
+															<span class="comment" data-toggle="tooltip" title="Comments">
+																<i class="fa fa-comments-o"></i>
+																<ins>52</ins>
+															</span>
+															</li>
+															<li>
+															<span class="like" data-toggle="tooltip" title="like">
+																<i class="ti-heart"></i>
+																<ins>2.2k</ins>
+															</span>
+															</li>
+															<li>
+															</li>
+															<li class="social-media">
+																<div class="menu">
+																	<div class="btn trigger"><i class="fa fa-share-alt"></i></div>
+																	<div class="rotater">
+																		<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-facebook"></i></a></div>
+																	</div>
+																	<div class="rotater">
+																		<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-twitter"></i></a></div>
+																	</div>
+																	<div class="rotater">
+																		<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-instagram"></i></a>
+																		</div>
+																	</div>
+																</div>
+															</li>
+														</ul>
+													</div>
+												</div>
+											</div>
+											<div class="coment-area">
+												<ul class="we-comet">
+													<li>
+														<div class="comet-avatar">
+															<img src="/images/resources/user2.png" alt="">
+														</div>
+														<div class="we-comment">
+															<div class="coment-head">
+																<h5><a href="#" title="">ENFP</a></h5>
+																<span>1 year ago</span>
+																<a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a>
+															</div>
+															<p>왜 이해 못해줌? 그 친구 혹시 T야?</p>
+														</div>
+													<li>
+														<a href="#" title="" class="showmore underline">more comments</a>
+													</li>
+													<li class="post-comment">
+														<div class="comet-avatar">
+															<img src="/images/resources/user2.png" alt="">
+														</div>
+														<div class="post-comt-box">
+															<form method="post">
+																<textarea placeholder="Post your comment"></textarea>
+																<div class="add-smiles">
+																	<span class="em em-expressionless" title="add icon"></span>
+																</div>
+																<div class="smiles-bunch">
+																	<i class="em em---1"></i>
+																	<i class="em em-smiley"></i>
+																	<i class="em em-anguished"></i>
+																	<i class="em em-laughing"></i>
+																	<i class="em em-angry"></i>
+																	<i class="em em-astonished"></i>
+																	<i class="em em-blush"></i>
+																	<i class="em em-disappointed"></i>
+																	<i class="em em-worried"></i>
+																	<i class="em em-kissing_heart"></i>
+																	<i class="em em-rage"></i>
+																	<i class="em em-stuck_out_tongue"></i>
+																</div>
+																<button type="submit"></button>
+															</form>
+														</div>
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+
+
+								</div>
+							</div><!-- centerl meta -->
+							<div class="col-lg-3">
+								<aside class="sidebar static">
+									<div class="widget friend-list stick-widget">
+										<h4 class="widget-title">Friends</h4>
+										<div id="searchDir"></div>
+										<ul id="people-list" class="friendz-list">
+											<li>
+												<figure>
+													<img src="/images/resources/user.png" alt="">
+													<span class="status f-online"></span>
+												</figure>
+												<div class="friendz-meta">
+													<a href="">인싸</a>
+													<i><a href="https://wpkixx.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f2859b9c869780819d9e969780b2959f939b9edc919d9f">[email&#160;protected]</a></i>
+												</div>
+											</li>
+										</ul>
+										<div class="chat-box">
+											<div class="chat-head">
+												<span class="status f-online"></span>
+												<h6>아싸</h6>
+												<div class="more">
+													<span><i class="ti-more-alt"></i></span>
+													<span class="close-mesage"><i class="ti-close"></i></span>
+												</div>
+											</div>
+											<div class="chat-list">
+												<ul>
+													<li class="me">
+														<div class="chat-thumb"><img src="/images/resources/user2.png" alt=""></div>
+														<div class="notification-event">
+															<span class="chat-message-item">
+																안녕~!
+															</span>
+															<span class="notification-date"><time datetime="2004-07-24T18:18" class="entry-date updated">Yesterday at 8:10pm</time></span>
+														</div>
+													</li>
+													<li class="you">
+														<div class="chat-thumb"><img src="/images/resources/user.png" alt=""></div>
+														<div class="notification-event">
+															<span class="chat-message-item">
+																뭐해?
+															</span>
+															<span class="notification-date"><time datetime="2004-07-24T18:18" class="entry-date updated">Yesterday at 8:10pm</time></span>
+														</div>
+													</li>
+													<li class="me">
+														<div class="chat-thumb"><img src="/images/resources/user2.png" alt=""></div>
+														<div class="notification-event">
+															<span class="chat-message-item">
+																그냥 있지~
+															</span>
+															<span class="notification-date"><time datetime="2004-07-24T18:18" class="entry-date updated">Yesterday at 8:10pm</time></span>
+														</div>
+													</li>
+												</ul>
+												<form class="text-box">
+													<textarea placeholder=""></textarea>
+													<div class="add-smiles">
+														<span title="add icon" class="em em-expressionless"></span>
+													</div>
+													<div class="smiles-bunch">
+														<i class="em em---1"></i>
+														<i class="em em-smiley"></i>
+														<i class="em em-anguished"></i>
+														<i class="em em-laughing"></i>
+														<i class="em em-angry"></i>
+														<i class="em em-astonished"></i>
+														<i class="em em-blush"></i>
+														<i class="em em-disappointed"></i>
+														<i class="em em-worried"></i>
+														<i class="em em-kissing_heart"></i>
+														<i class="em em-rage"></i>
+														<i class="em em-stuck_out_tongue"></i>
+													</div>
+													<button type="submit"></button>
+												</form>
+											</div>
+										</div>
+									</div><!-- friends list sidebar -->
+								</aside>
+							</div><!-- sidebar -->
+						</div>	
+					</div>
+				</div>
+			</div>
+		</div>	
+	</section>
+
+	<footer>
+	</footer><!-- footer -->
+</div>
+	<div class="side-panel">
+		<h4 class="panel-title">General Setting</h4>
+		<form method="post">
+			<div class="setting-row">
+				<span>use night mode</span>
+				<input type="checkbox" id="nightmode1"/> 
+				<label for="nightmode1" data-on-label="ON" data-off-label="OFF"></label>
+			</div>
+			<div class="setting-row">
+				<span>Notifications</span>
+				<input type="checkbox" id="switch22" /> 
+				<label for="switch22" data-on-label="ON" data-off-label="OFF"></label>
+			</div>
+			<div class="setting-row">
+				<span>Notification sound</span>
+				<input type="checkbox" id="switch33" /> 
+				<label for="switch33" data-on-label="ON" data-off-label="OFF"></label>
+			</div>
+			<div class="setting-row">
+				<span>My profile</span>
+				<input type="checkbox" id="switch44" /> 
+				<label for="switch44" data-on-label="ON" data-off-label="OFF"></label>
+			</div>
+			<div class="setting-row">
+				<span>Show profile</span>
+				<input type="checkbox" id="switch55" /> 
+				<label for="switch55" data-on-label="ON" data-off-label="OFF"></label>
+			</div>
+		</form>
+		<h4 class="panel-title">Account Setting</h4>
+		<form method="post">
+			<div class="setting-row">
+				<span>Sub users</span>
+				<input type="checkbox" id="switch66" /> 
+				<label for="switch66" data-on-label="ON" data-off-label="OFF"></label>
+			</div>
+			<div class="setting-row">
+				<span>personal account</span>
+				<input type="checkbox" id="switch77" /> 
+				<label for="switch77" data-on-label="ON" data-off-label="OFF"></label>
+			</div>
+			<div class="setting-row">
+				<span>Business account</span>
+				<input type="checkbox" id="switch88" /> 
+				<label for="switch88" data-on-label="ON" data-off-label="OFF"></label>
+			</div>
+			<div class="setting-row">
+				<span>Show me online</span>
+				<input type="checkbox" id="switch99" /> 
+				<label for="switch99" data-on-label="ON" data-off-label="OFF"></label>
+			</div>
+			<div class="setting-row">
+				<span>Delete history</span>
+				<input type="checkbox" id="switch101" /> 
+				<label for="switch101" data-on-label="ON" data-off-label="OFF"></label>
+			</div>
+			<div class="setting-row">
+				<span>Expose author name</span>
+				<input type="checkbox" id="switch111" /> 
+				<label for="switch111" data-on-label="ON" data-off-label="OFF"></label>
+			</div>
+		</form>
+	</div><!-- side panel -->		
+	
+	<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="/js/main.min.js"></script>
+	<script src="/js/script.js"></script>
+
+</body>	
+
+</html>

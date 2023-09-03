@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mbti.demo.mybatis.FestivalMapper">
+    <resultMap id="festivalMap" type="Festival">
+        <id property="festival" column="축제이름" />
+        <result property="day" column="기간" />
+        <result property="place" column="장소" />
+        <result property="picture" column="사진" javaType="byte[]" jdbcType="BLOB" />
+    </resultMap>
+
+
+    <select id="getAllFestivals" resultMap="festivalMap">
+        SELECT "축제이름", "기간", "장소", "사진" FROM festival
+    </select>
+
+    <select id="getX" resultType="Festival">
+        SELECT x FROM festival
+    </select>
+    <select id="getY" resultType="Festival">
+        SELECT y FROM festival
+    </select>
+
+</mapper>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mbti.demo.mybatis.MemberMapper">
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        <selectKey keyProperty="id" resultType="java.lang.Long" order="BEFORE">
+            SELECT member_seq.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO member (id, login_id, password, password2, name, email, phone_number,mbti,nick_name)
+        VALUES (#{id}, #{loginId}, #{password}, #{password2}, #{name}, #{email}, #{phoneNumber}, #{mbti}, #{nickName})
+    </insert>
+
+
+<!--호출구문 : void update(@Param("id") Long id, @Param("updateParam") ItemUpdateDto updateParam); -->
+    <update id="update">
+        update member
+        set password=#{memberUpdateParam.password},
+            password2=#{memberUpdateParam.password},
+            email=#{memberUpdateParam.email},
+            phone_number=#{memberUpdateParam.phoneNumber},
+            mbti=#{memberUpdateParam.mbti}
+        where login_id = #{loginId}
+    </update>
+
+<!-- resultType: 조회의 결과를 받을 타입을 명시
+특별한 설정이 없다면  타입의 패키지 경로까지 명시해 줘야 한다.
+현재 프로젝트 설정(application.properties)
+mybatis.type-aliases-package=hello.itemservice.domain
+이렇게 item 클래스에 대한 패키지 경로르 지정해 주었기 때문에 Item으로 표기가 가능하다.
+mybatis.configuration.map-underscore-to-camel-case=true 속성을 지정한 덕분에
+언더스코어를 카멜 표기법으로 자동으로 처리해준다. ( item_name itemName )
+ -->
+    <select id="findByLoginId" resultType="member">
+        select *
+        from member
+        where login_id=#{loginId}
+    </select>
+
+    <select id="findById" resultType="member">
+        select *
+        from member
+        where id = #{id}
+    </select>
+
+    <select id="findAll" resultType="member">
+        select *
+        from member
+    </select>
+
+    <select id="findByNameEmail" resultType="Member">
+        select *
+        from member
+        where name=#{name} and email=#{email}
+    </select>
+
+<!--    <select id="findNamePhone" resultType="member">-->
+<!--        select login_id-->
+<!--        from member-->
+<!--        where loginId=#{loginId} and phoneNumber=#{phoneNumber}-->
+<!--    </select>-->
+
+    <select id="findPasswordNameEmail" resultType="member">
+        select *
+        from member
+        where login_id=#{loginId} and name=#{name} and email=#{email}
+    </select>
+
+
+<!-- if 조건을 하나라도 만족하면 where 구문을 추가한다.
+두가지가 모두 존재하는 경우
+* H2용 SQL
+SELECT id, item_name, price, quantity
+FROM item
+WHERE item_name LIKE CONCAT('%', #{itemName}, '%')
+AND price <= #{maxPrice}
+
+* 오라클용 SQL
+SELECT id, item_name, price, quantity
+FROM item
+WHERE item_name LIKE '%' || #{itemName} || '%'
+AND price <= #{maxPrice}
+
+itemName이 'item' 이고 maxPrice가 1000 이면 SQL은 아래와 같이 치환
+SELECT id, item_name, price, quantity
+FROM item
+WHERE item_name LIKE 'item'
+AND price <=1000
+-->
+
+
+
+
+</mapper>

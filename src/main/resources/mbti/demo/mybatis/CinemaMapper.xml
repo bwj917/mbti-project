@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mbti.demo.mybatis.CinemaMapper">
+    <resultMap id="CinemaMap" type="Cinema">
+        <id property="name" column="영화관" />
+        <result property="address" column="주소" />
+        <result property="picture" column="사진" />
+    </resultMap>
+
+    <select id="getAllCinemas" resultMap="CinemaMap">
+        SELECT "영화관", "주소" , "사진" FROM cinema
+    </select>
+
+    <select id="getAdd" resultMap="CinemaMap">
+        SELECT "주소" FROM cinema
+    </select>
+</mapper>

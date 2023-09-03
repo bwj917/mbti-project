@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Combined Charts</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js" th:src="@{https://cdn.jsdelivr.net/npm/chart.js}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.0/dist/chart.min.js" th:src = "@{https://cdn.jsdelivr.net/npm/chart.js@3.0.0/dist/chart.min.js}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0" th:src = "@{https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0}"></script>
+  <link rel="stylesheet" href="../static/css/popup.css" th:href="@{/css/popup.css}">
+  <style>
+    body {
+      padding-top: 50px;
+      background-color: #3E7DAB;
+    }
+
+    .chart-container {
+      border-radius: 10px;
+      background-color: #ffffff;
+      width: 100%; /* 가로 폭 100%로 설정하여 차트를 박스의 크기에 맞게 조절 */
+      max-width: 100%; /* 원하는 최대 너비 값 설정 */
+      border: 1px solid #ccc; /* 원하는 스타일의 테두리 추가 */
+      padding: 20px; /* 원하는 여백 설정 */
+      box-sizing: border-box; /* 내부 padding을 포함한 크기로 설정 */
+    }
+    .chart-container2 {
+      border-radius: 10px;
+      background-color: #ffffff;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+      border: 1px solid #ccc;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .popup-container{
+      border-radius: 10px;
+      background-color: #8fb0c6;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    #chart2,#chart3,#chart4,#chart5{
+      flex: 1;
+      width: 200px; /* 각 차트가 컨테이너의 25%를 차지하도록 설정 */
+      height: 200px; /* 차트의 높이를 고정값으로 설정 */
+    }
+
+
+    /* 상단 로고 또는 제목 영역 스타일 설정 */
+    header {
+      text-align: center;
+      margin-bottom: 20px; /* 로고와 차트 사이에 간격을 주기 위해 사용 */
+    }
+
+    .charts-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding-bottom: 100px;
+      flex-direction: row;
+    }
+    .chart {
+      padding-top: 50px;
+      flex: 1;
+    }
+    .color-1 {
+    }
+
+    .color-1 {
+      background-color: rgba(101,153,153,0.2);
+    }
+
+    .color-2 {
+      background-color: rgba(102,204,153,0.2);
+    }
+
+    .color-3 {
+      background-color: rgba(255,153,153,0.2);
+    }
+
+    .color-4 {
+      background-color: rgba(255,204,153,0.2)
+    }
+    h2{
+      color: white;
+      width: 100%; /* 가로 폭 100%로 설정하여 차트를 감싸도록 함 */
+      text-align: center;
+      font-size: 2em;
+      /* 텍스트를 가운데 정렬 */
+    }
+    h3{
+      color: darkgray;
+      width: 100%; /* 가로 폭 100%로 설정하여 차트를 감싸도록 함 */
+      text-align: center; /* 텍스트를 가운데 정렬 */
+      font-size: 1.5em;
+    }
+    img{
+      width: 360px;
+      height: 300px;
+      display: block;
+      margin: auto;
+    }
+    ul{
+      padding-inline-start: 20px;
+    }
+    footer{
+      margin-top: 100px;
+    }
+
+  </style>
+</head>
+<body>
+<div th:insert="~{${login}}"></div>
+<section class="information">
+  <div class="charts-row">
+    <h2>MBTI RANKING<br>(나와 같은 유형, 얼마나 있을까?)</h2>
+    <div class="chart-container">
+      <div class="chart">
+        <canvas id="chart1" width="500" height="100"></canvas>
+      </div>
+    </div>
+  </div>
+  <div class="charts-row">
+    <h2>MBTI R A T E<br>(유형별 집중 탐구)</h2>
+      <div class="chart-container2">
+        <div class="chart">
+          <h3>E/I 비율</h3>
+          <canvas id="chart2"></canvas>
+        </div>
+        <div class="chart">
+          <h3>N/S 비율</h3>
+          <canvas id="chart3"></canvas>
+        </div>
+        <div class="chart">
+          <h3>T/F 비율</h3>
+          <canvas id="chart4" ></canvas>
+        </div>
+        <div class="chart">
+          <h3>P/J 비율</h3>
+          <canvas id="chart5"></canvas>
+        </div>
+    </div>
+  </div>
+</section>
+<!--mbti graph end-->
+
+<!--information button start-->
+<table class="popup-container">
+  <h2>MBTI 정보<br>#나의 키워드 #내 성향</h2>
+
+  <tr th:each="i, rowStat : ${information}" th:if="${rowStat.index % 4 == 0}" th:class="${'color-' + ((rowStat.index / 4) % 4 + 1)}">
+    <td>
+      <button class="openBtn"><h2 th:text ="|${i.getIndicate()}|"></h2></button>
+      <div class="modal hidden">
+        <div class="bg"></div>
+        <div></div>
+        <div class="modalBox">
+          <h4  th:text="|${i.getPersonality()}|"></h4>
+          <ul>
+            <li th:text="|${i.getKeyword1()}|"></li>
+            <li th:text="|${i.getKeyword2()}|"></li>
+            <li th:text="|${i.getKeyword3()}|"></li>
+            <li th:text="|${i.getKeyword4()}|"></li>
+            <li th:text="|${i.getKeyword5()}|"></li>
+            <li th:text="|${i.getKeyword6()}|"></li>
+            <li th:text="|${i.getKeyword7()}|"></li>
+            <li th:text="|${i.getKeyword8()}|"></li>
+            <li th:text="|${i.getKeyword9()}|"></li>
+            <li th:text="|${i.getKeyword10()}|"></li>
+            <hr>
+            <h4>직업 통계</h4>
+            <img th:src="|${i.getImg()}|">
+          </ul>
+          <button class="closeBtn">닫기</button>
+        </div>
+      </div>
+    </td>
+    <td th:if="${information.size() > rowStat.index + 1}">
+      <button class="openBtn" ><h2 th:text ="|${information[rowStat.index + 1].getIndicate()}|"></h2></button>
+      <div class="modal hidden">
+        <div class="bg"></div>
+        <div class="modalBox">
+          <h4 th:text ="|${information[rowStat.index + 1].getPersonality()}|"></h4>
+          <ul>
+            <li th:text="|${information[rowStat.index + 1].getKeyword1()}|"></li>
+            <li th:text="|${information[rowStat.index + 1].getKeyword2()}|"></li>
+            <li th:text="|${information[rowStat.index + 1].getKeyword3()}|"></li>
+            <li th:text="|${information[rowStat.index + 1].getKeyword4()}|"></li>
+            <li th:text="|${information[rowStat.index + 1].getKeyword5()}|"></li>
+            <li th:text="|${information[rowStat.index + 1].getKeyword6()}|"></li>
+            <li th:text="|${information[rowStat.index + 1].getKeyword7()}|"></li>
+            <li th:text="|${information[rowStat.index + 1].getKeyword8()}|"></li>
+            <li th:text="|${information[rowStat.index + 1].getKeyword9()}|"></li>
+            <li th:text="|${information[rowStat.index + 1].getKeyword10()}|"></li>
+            <hr>
+            <h4>직업 통계</h4>
+            <img th:src="|${information[rowStat.index + 1].getImg()}|">
+          </ul>
+          <button class="closeBtn">닫기</button>
+        </div>
+      </div>
+    </td>
+    <td th:if="${information.size() > rowStat.index + 2}">
+      <button class="openBtn"><h2 th:text ="|${information[rowStat.index + 2].getIndicate()}|"></h2></button>
+      <div class="modal hidden">
+        <div class="bg"></div>
+        <div class="modalBox">
+          <h4 th:text="|${information[rowStat.index + 2].getPersonality()}|"></h4>
+          <ul>
+            <li th:text="|${information[rowStat.index + 2].getKeyword1()}|"></li>
+            <li th:text="|${information[rowStat.index + 2].getKeyword2()}|"></li>
+            <li th:text="|${information[rowStat.index + 2].getKeyword3()}|"></li>
+            <li th:text="|${information[rowStat.index + 2].getKeyword4()}|"></li>
+            <li th:text="|${information[rowStat.index + 2].getKeyword5()}|"></li>
+            <li th:text="|${information[rowStat.index + 2].getKeyword6()}|"></li>
+            <li th:text="|${information[rowStat.index + 2].getKeyword7()}|"></li>
+            <li th:text="|${information[rowStat.index + 2].getKeyword8()}|"></li>
+            <li th:text="|${information[rowStat.index + 2].getKeyword9()}|"></li>
+            <li th:text="|${information[rowStat.index + 2].getKeyword10()}|"></li>
+            <hr>
+            <h4>직업 통계</h4>
+            <img th:src="|${information[rowStat.index + 2].getImg()}|">
+          </ul>
+          <button class="closeBtn">닫기</button>
+        </div>
+      </div>
+    </td>
+    <td th:if="${information.size() > rowStat.index + 3}">
+      <button class="openBtn"><h2 th:text ="|${information[rowStat.index + 3].getIndicate()}|"></h2></button>
+      <div class="modal hidden">
+        <div class="bg"></div>
+        <div class="modalBox">
+          <h4 th:text="|${information[rowStat.index + 3].getPersonality()}|"></h4>
+          <ul>
+            <li th:text="|${information[rowStat.index + 3].getKeyword1()}|"></li>
+            <li th:text="|${information[rowStat.index + 3].getKeyword2()}|"></li>
+            <li th:text="|${information[rowStat.index + 3].getKeyword3()}|"></li>
+            <li th:text="|${information[rowStat.index + 3].getKeyword4()}|"></li>
+            <li th:text="|${information[rowStat.index + 3].getKeyword5()}|"></li>
+            <li th:text="|${information[rowStat.index + 3].getKeyword6()}|"></li>
+            <li th:text="|${information[rowStat.index + 3].getKeyword7()}|"></li>
+            <li th:text="|${information[rowStat.index + 3].getKeyword8()}|"></li>
+            <li th:text="|${information[rowStat.index + 3].getKeyword9()}|"></li>
+            <li th:text="|${information[rowStat.index + 3].getKeyword10()}|"></li>
+            <hr>
+            <h4>직업 통계</h4>
+            <img th:src="|${information[rowStat.index + 3].getImg()}|">
+          </ul>
+          <button class="closeBtn">닫기</button>
+        </div>
+      </div>
+    </td>
+  </tr>
+</table>
+<div th:insert="~{footer.html}"></div>
+
+<script type="module" th:inline="javascript">
+  import { chart } from '/js/chart.js'
+  const a = [[${ mbti }]]
+  chart(a)
+</script>
+<script type="text/javascript" th:src="@{/js/popup.js}"></script>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Checkbox Page</title>
+</head>
+<body>
+<form id ="form1" action="#" th:action="@{/checkbox}" th:object="${checkboxInfo}" method="post">
+  <li>
+    <div>text</div>
+    <div>
+
+    </div>
+  </li>
+
+  <label>
+    <input type="checkbox" th:field="*{checkboxLabel}" value="Option 1"/> Option 1
+  </label>
+  <br/>
+  <label>
+    <input type="checkbox" th:field="*{checkboxLabel}" value="Option 2"/> Option 2
+  </label>
+  <br/>
+  <button type="submit">Submit</button>
+</form>
+<script src="js/test.js"></script>
+</body>
+</html>

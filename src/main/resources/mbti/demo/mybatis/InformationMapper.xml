@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mbti.demo.mybatis.InformationMapper">
+
+    <select id="findAll" resultType="information">
+        select
+            indicate,
+            personality,
+            keyword1,
+            keyword2,
+            keyword3,
+            keyword4,
+            keyword5,
+            keyword6,
+            keyword7,
+            keyword8,
+            keyword9,
+            keyword10,
+            img
+        from information
+    </select>
+</mapper>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mbti.demo.mybatis.FoodMapper">
+    <resultMap id="foodMap" type="Food">
+        <id property="name" column="맛집" />
+        <result property="address" column="주소" />
+        <result property="picture" column="사진" />
+    </resultMap>
+
+    <select id="getAllFoods" resultMap="foodMap">
+        SELECT "맛집", "주소","사진" FROM food
+    </select>
+
+    <select id="getAllAddress" resultMap="foodMap">
+        SELECT "주소" FROM food
+    </select>
+</mapper>

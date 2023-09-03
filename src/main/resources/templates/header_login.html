@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        
+        <!-- 헤더 관련 -->
+        <!-- 헤더 레이어 -->
+        <link rel="stylesheet" href="css/main.min.css" th:href="@{/css/main.min.css}">
+        <!-- 헤더 폰트나 기능 -->
+        <link rel="stylesheet" href="css/style.css" th:href="@{/css/style.css}">
+        
+        <!-- 추천쪽 버튼 색상 관련-->
+        <link rel="stylesheet" href="css/color.css" th:href="@{/css/color.css}">
+
+        <!--화면 크기에 대한 반응-->
+        <link rel="stylesheet" href="/css/responsive.css">
+        
+        <title>Project_Mbti</title>
+    </head>
+    <body>
+    <div class="topbar stick">
+        <div class="logo">
+            <a title="" th:href="@{/}"><img src="/img/MBTI껌.png" style="width: 70px; height: 40px;"></a>
+        </div>
+
+        <div class="top-area">
+            <ul class="main-menu">
+                <li>
+                    <a href="#" title="" th:href="@{/about}">About</a>
+                </li>
+                <li>
+                    <a href="#" title="" th:href="@{/book/best}">Book</a>
+                    <ul>
+                        <li><a th:href="@{/book/best}">베스트 셀러</a></li>
+                        <li><a th:href="@{/book/mbti/type/{id}(id = NT)}">분석가형(_NT_)</a></li>
+                        <li><a th:href="@{/book/mbti/type/{id}(id = NF)}">외교관형(_NF_)</a></li>
+                        <li><a th:href="@{/book/mbti/type/{id}(id = SJ)}">관리자형(_S_J)</a></li>
+                        <li><a th:href="@{/book/mbti/type/{id}(id = SP)}">탐험가형(_S_P)</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" title="" th:href="@{/movie/box}">Movie</a>
+                    <ul>
+                        <li><a th:href="@{/movie/box}">박스 오피스</a></li>
+                        <li><a th:href="@{/movie/mbti/type/{id}(id = NT)}">분석가형(_NT_)</a></li>
+                        <li><a th:href="@{/movie/mbti/type/{id}(id = NF)}">외교관형(_NF_)</a></li>
+                        <li><a th:href="@{/movie/mbti/type/{id}(id = SJ)}">관리자형(_S_J)</a></li>
+                        <li><a th:href="@{/movie/mbti/type/{id}(id = SP)}">탐험가형(_S_P)</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" title="" th:href="@{/music/mbti/type}">Music</a>
+                    <ul>
+                        <li><a class="dropdown-item" th:href="@{/music/mbti/type}">탑 100</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#Community" th:href="@{/getAllData}">Place</a>
+                </li>
+                <li>
+                    <a href="#Community" th:href="@{/get_recommendations}">AI.TIP</a>
+                    <ul>
+                        <li><a th:href="@{/get_book_recommendations}">Book</a></li>
+                        <li><a th:href="@{/get_recommendations}">Movie</a></li>
+                    </ul>
+
+                </li>
+                <li>
+                    <a href="#Community" th:href="@{/community}">Community</a>
+                </li>
+            </ul>
+            <ul style="float: right" class="main-menu">
+                <li>
+                    <a  href="#" th:href="@{/mypage}">My Page</a>
+                </li>
+                <li>
+                    <a href="login/login.html" th:href="@{/logout}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div><!-- topbar -->
+    <script src="/js/community/main.min.js" th:href="@{/js/community/main.min.js}"></script>
+    <script src="/js/community/script.js" th:href="@{/js/community/script.js}"></script>
+    </body>
+</html>

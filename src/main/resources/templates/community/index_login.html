@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<title>Community</title>
+
+	<link rel="stylesheet" href="css/main.min.css" th:href="@{/css/main.min.css}">
+	<link rel="stylesheet" href="css/style.css"  th:href="@{/css/style.css}">
+	<link rel="stylesheet" href="css/color.css"  th:href="@{/css/color.css}">
+	<link rel="stylesheet" href="css/responsive.css" th:href="@{/css/reponsive.css}">
+</head>
+<body>
+<div th:insert="~{header_login.html}"></div>
+<!--<div class="se-pre-con"></div>-->
+<div class="theme-layout">
+	<section>
+		<div class="ext-gap bluesh high-opacity">
+			<div class="content-bg-wrap" style="background: url(/images/resources/community.jpg)"></div>
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="top-banner">
+							<h1>COMMUNITY</h1>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section><!-- top area animated -->
+	<section>
+		<div class="gap gray-bg">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="row" id="page-contents">
+							<div class="col-lg-3">
+								<aside class="sidebar static">
+									<div class="widget">
+										<h4 class="widget-title"></h4>
+										<ul class="naves">
+											<li>
+												<i class="ti-clipboard"></i>
+												<a href="index_login.html" title=""th:href="@{/community}">게시물</a>
+											</li>
+											<li>
+												<i class="ti-files"></i>
+												<a href="timeline.html" title="">내 게시물</a>
+											</li>
+											<li>
+												<i class="ti-comments-smiley"></i>
+												<a href="messages.html" title="">메세지</a>
+											</li>
+											<li>
+												<i class="ti-user"></i>
+												<a href="timeline-friends.html" title="">사용자</a>
+											</li>
+<!--											<li>-->
+<!--												<i class="ti-share"></i>-->
+<!--												<a href="people-nearby.html" title="">동네친구</a>-->
+<!--											</li>-->
+										</ul>
+									</div><!-- Shortcuts -->
+									<div class="widget stick-widget">
+										<h4 class="widget-title">Popular Tags</h4>
+										<ul class="followers">
+											<li>
+												<h5>#MBTI</h5>
+											</li>
+											<li>
+												<h5>#INFJ</h5>
+											</li>
+											<li>
+												<h5>#ISFP</h5>
+											</li>
+											<li>
+												<h5>#ISTJ</h5>
+											</li>
+											<li>
+												<h5>#ENTP</h5>
+											</li>
+											<li>
+												<h5>#ESFP</h5>
+											</li>
+										</ul>
+									</div><!-- popular tags -->
+								</aside>
+							</div><!-- sidebar -->
+							<div class="col-lg-6">
+								<div class="central-meta">
+									<div class="new-postbox">
+										<figure>
+											<img src="/images/resources/user.png" alt="">
+										</figure>
+										<div class="newpst-input">
+											<!-- 게시물 작성 폼 -->
+											<form th:action="@{/community/{memberId}(memberId=${session.loginMember.getId()})}" method="post">
+												<textarea name="Content"></textarea>
+												<div class="attachments">
+													<ul name="nickName">
+														<li>
+															<i class="fa fa-music"></i>
+															<label class="fileContainer">
+																<input type="file">
+															</label>
+														</li>
+														<li>
+															<i class="fa fa-image"></i>
+															<label class="fileContainer">
+																<input type="file">
+															</label>
+														</li>
+														<li>
+															<i class="fa fa-video-camera"></i>
+															<label class="fileContainer">
+																<input type="file">
+															</label>
+														</li>
+														<li>
+															<i class="fa fa-camera"></i>
+															<label class="fileContainer">
+																<input type="file">
+															</label>
+														</li>
+														<li>
+															<button type="submit">Post</button>
+														</li>
+													</ul>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+								<script th:inline="javascript">
+									const a = [[${ reple }]]
+									const b = [[${ list }]]
+									console.log(a)
+									console.log(b)
+								</script>
+								<!--  게시글 리스트  -->
+								<div class="loadMore">
+									<div class="central-meta item" th:each="list : ${list}">
+										<div class="user-post">
+											<div class="friend-info">
+												<figure>
+													<img src="/images/resources/user.png" alt="">
+												</figure>
+												<div class="friend-name">
+													<!-- 닉네임 -->
+													<ins><a href="" title="" th:text="${list.nickName}">CY</a></ins>
+													<!-- ? -->
+													<span th:text="${list.dayTime}"></span>
+													<li style="font-size: 14px;list-style: none;">
+														<a th:href="@{/community/update/{id}(id=${list.id})}">수정</a>
+														<a th:href="@{/community/delete(id=${list.id})}">삭제</a>
+													</li>
+												</div>
+												<!-- 삭제 수정 -->
+												<!-- 리스트 내용 -->
+												<div class="post-meta">
+													<img src="" alt="">
+													<div class="description">
+														<p th:text="${list.content}"></p>
+													</div>
+<!--													&lt;!&ndash; 삭제 수정 &ndash;&gt;-->
+<!--													<li>-->
+<!--														<a th:href="@{/community/update/{id}(id=${list.id})}">수정</a>-->
+<!--														<a th:href="@{/community/delete(id=${list.id})}">삭제</a>-->
+<!--													</li>-->
+													<div class="we-video-info">
+														<ul>
+															<li>
+															<span class="views" data-toggle="tooltip" title="views">
+																<i class="fa fa-eye"></i>
+																<ins>1.2k</ins>
+															</span>
+															</li>
+															<li>
+															<span class="comment" data-toggle="tooltip" title="Comments">
+																<i class="fa fa-comments-o"></i>
+																<ins>52</ins>
+															</span>
+															</li>
+															<th:block th:each="community : ${list}">
+																<li>
+																	<span class="like" data-toggle="tooltip" title="like">
+																		<i class="ti-heart" th:attr="data-community-id=${community.id}"></i>
+																		<ins th:text="${community.likeCount}"></ins>
+																	</span>
+																</li>
+															</th:block>
+															<li class="social-media">
+																<div class="menu">
+																	<div class="btn trigger"><i class="fa fa-share-alt"></i></div>
+																	<div class="rotater">
+																		<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-facebook"></i></a></div>
+																	</div>
+																	<div class="rotater">
+																		<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-twitter"></i></a></div>
+																	</div>
+																	<div class="rotater">
+																		<div class="btn btn-icon"><a href="#" title=""><i class="fa fa-instagram"></i></a></div>
+																	</div>
+																</div>
+															</li>
+														</ul>
+													</div>
+												</div>
+											</div>
+
+											<div class="coment-area" >
+												<ul class="we-comet">
+													<li th:each=" reple : ${reple}" th:if="${reple.tableId == list.id}">
+														<!-- 댓글 유저 사진  -->
+														<div class="comet-avatar">
+															<img src="/images/resources/user2.png" alt="">
+														</div>
+														<!-- 댓글 리스트 영역 -->
+														<div class="we-comment" >
+															<div class="coment-head">
+																<h5><a href="time-line.html" title="" th:text="${reple.nickName}">ENFP</a></h5>
+																<a class="we-reply" href="#" title="Reply"><i class="fa fa-reply"></i></a>
+															</div>
+															<p th:text="${reple.content}">왜 이해 못해줌? 그 친구 혹시 T야?</p>
+														</div>
+														<div>
+															<p th:text="${reple.dayTime}"></p>
+														</div>
+													<li>
+														<a href="#" title="" class="showmore underline">more comments</a>
+													</li>
+													<li class="post-comment">
+														<!-- 댓글 작성 폼쪽 유저 사진 -->
+														<div class="comet-avatar">
+															<img src="/images/resources/user2.png" alt="">
+														</div>
+														
+														<div class="post-comt-box">
+															<!-- 댓글 폼 -->
+															<form action="/community/reple" method="post">
+																<div th:value="${list.getId}"></div>
+																<div th:name="${list.getMemberId}"></div>
+																<div th:name="${list.getNickName}"></div>
+																<input style="display:none" type="text" name="nickName" th:value="${session.loginMember.nickName}"></input>
+																<input style="display:none" type="text" name="tableId" th:value="${list.id}"></input>
+																<input style="display:none" type="text" name="memberId" th:value="${session.loginMember.id}"></input>
+																<textarea name="content"></textarea>
+																<div class="add-smiles">
+																	<span class="em em-expressionless" title="add icon"></span>
+																</div>
+																<button type="submit" class="post" style="color :black">send</button>
+															</form>
+														</div>
+
+													</li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div><!-- centerl meta -->
+							<!--  오픈채팅 방  -->
+							<div class="col-lg-3">
+								<aside class="sidebar static">
+									<div class="widget">
+										<h4 class="widget-title">오픈채팅</h4>
+										<div class="your-page">
+											<form action="/community" method="post">
+												<input type="text" name="name" placeholder="채팅방 이름">
+												<button type="submit" >방 만들기</button>
+											</form>
+
+											<table>
+												<tr th:each="room : ${roomList}" >
+													<td>
+														<a th:href="@{/chat/chatRoom(roomId=${room.roomId})}"
+														   th:text="${room.name}"></a>
+													</td>
+												</tr>
+											</table>
+										</div>
+									</div><!-- Categories -->
+									<!-- 사용자쪽 -->
+									<div class="widget friend-list stick-widget">
+										<h4 class="widget-title">사용자</h4>
+										<div id="searchDir"></div>
+										<ul id="people-list" class="friendz-list" th:each="members : ${members}">
+											<li>
+												<figure>
+													<img src="/images/resources/user.png" alt="">
+													<span class="status f-online"></span>
+												</figure>
+												<div class="friendz-meta">
+													<a href="" th:text="${members.nickName}">인싸</a>
+												</div>
+											</li>
+										</ul>
+									</div><!-- friends list sidebar -->
+								</aside>
+							</div><!-- sidebar -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<div th:insert="~{footer.html}"></div>
+</div>
+
+</body>
+</html>

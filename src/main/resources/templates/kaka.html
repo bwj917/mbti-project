@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <title>주소로 장소 표시하기</title>
+  <style>
+    #searchContainer {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      z-index: 1000;
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    #searchInput {
+      width: 200px;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+
+    #searchResults {
+      position: absolute;
+      top: calc(20px + 40px);
+      left: 20px;
+      z-index: 999;
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      max-width: 450px;
+      max-height: calc(100vh - 60px);
+      overflow-y: auto;
+    }
+
+
+    .result-item {
+      margin-bottom: 10px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+    }
+
+    #searchButton {
+      margin-left: 5px;
+      padding: 5px 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+    #searchContainer {
+      position: absolute;
+      top: 50px;
+      left: 20px;
+      z-index: 1000;
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    #searchInput {
+      width: 400px;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+    #map {
+      width: calc(100% - 340px); /* 검색결과 목록 폭 + 여백만큼 감소 */
+      height: 100vh;
+      /*position: absolute;*/
+      margin: 0 auto !important;
+    }
+    .map{
+      margin-bottom: 100px;
+    }
+
+  </style>
+</head>
+<body>
+<div th:insert="~{${login}}"></div>
+<div class="ext-gap bluesh high-opacity" style="margin-bottom: 100px;">
+  <div class="content-bg-wrap2" style="background: url(/images/resources/place.jpg)"></div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="top-banner">
+          <h1>Place</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--<div id="searchContainer">-->
+<!--  <input id="searchInput" type="text" placeholder="Search">-->
+<!--  <button id="searchButton">Search</button>-->
+<!--</div>-->
+<!--<div id="searchResults"></div>-->
+
+<div class="map">
+ <div id="map" style="width:100%;height:70vh;">
+   <div id="searchContainer">
+     <input id="searchInput" type="text" placeholder="Search">
+     <button id="searchButton">Search</button>
+   </div>
+   <div id="searchResults"></div>
+ </div>
+</div>
+
+
+<div th:insert="~{footer.html}"></div>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=041b078bdcd856906e02df7bc3f074ba&libraries=services"></script>
+<script th:inline="javascript">
+  var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+          mapOption = {
+            center: new kakao.maps.LatLng(33.450701, 126.570667), // 초기 중심 좌표
+            level: 10// 초기 확대 레벨
+          };
+
+  var map = new kakao.maps.Map(mapContainer, mapOption);
+
+  var cinemaInfo = /*[[${cinemaInfo}]]*/ [];
+  var cafeInfo = /*[[${cafeInfo}]]*/ [];
+  var foodInfo = /*[[${foodInfo}]]*/ [];
+
+  var previousInfowindow = null;
+
+  var combinedData = cinemaInfo.concat(cafeInfo).concat(foodInfo);
+
+  var batchSize = 25;
+  var currentIndex = 0;
+
+  function processBatch() {
+    var batchEnd = Math.min(currentIndex + batchSize, combinedData.length);
+
+    for (var i = currentIndex; i < batchEnd; i++) {
+      var info = combinedData[i];
+      var address = info.address;
+      var markerImage = ''; // Default marker image
+
+      if (cafeInfo.includes(info)) {
+        markerImage = 'img/카페.jpg';
+      } else if (cinemaInfo.includes(info)) {
+        markerImage = 'img/영화관.jpg';
+      } else if (foodInfo.includes(info)) {
+        markerImage = 'img/맛집.jpg';
+      }
+
+      var geocoder = new kakao.maps.services.Geocoder();
+      geocoder.addressSearch(address, function (result, status) {
+        if (status === kakao.maps.services.Status.OK) {
+          if (result.length > 0) {
+            var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+            var marker = new kakao.maps.Marker({
+              map: map,
+              position: coords,
+              image: new kakao.maps.MarkerImage(markerImage, new kakao.maps.Size(20, 20))
+            });
+
+            var infowindow = new kakao.maps.InfoWindow();
+
+            kakao.maps.event.addListener(marker, 'click', function () {
+              if (previousInfowindow !== null) {
+                previousInfowindow.close();
+              }
+
+              var content = '<div style="width:150px;text-align:center;padding:6px 0;">' +
+                      '<img src="' + info.picture + '" style="max-width:50px;height:auto;"><br>' +
+                      '이름: ' + info.name + '<br>' +
+                      '주소: ' + info.address + '</div>';
+
+              infowindow.setContent(content);
+              infowindow.open(map, marker);
+
+              previousInfowindow = infowindow;
+            });
+            markers.push(marker);
+          }
+        }
+      });
+    }
+    currentIndex = batchEnd;
+    console.log('Processed ' + currentIndex + ' out of ' + combinedData.length);
+    if (currentIndex < combinedData.length) {
+      setTimeout(processBatch, 500);
+    }
+  }
+
+  processBatch();
+
+  // 검색 버튼에 클릭 이벤트 리스너 추가
+  document.getElementById("searchButton").addEventListener("click", function () {
+    var keyword = document.getElementById("searchInput").value.toLowerCase();
+    var filteredData = combinedData.filter(function (info) {
+      return info.name.toLowerCase().includes(keyword) || info.address.toLowerCase().includes(keyword);
+    });
+
+    // 이전 검색 결과 지우기
+    var searchResultsContainer = document.getElementById("searchResults");
+    searchResultsContainer.innerHTML = "";
+
+    // 검색 결과 목록에 매칭된 결과 표시
+    filteredData.forEach(function (info) {
+      var resultItem = document.createElement("div");
+      resultItem.className = "result-item";
+      resultItem.innerHTML = '<strong>' + info.name + '</strong><br>' +
+              '<img src="' + info.picture + '" style="max-width:50px;height:auto;"><br>' +
+              '주소: ' + info.address;
+      searchResultsContainer.appendChild(resultItem);
+    });
+
+    clearAllMarkers(); // 마커 모두 제거
+    displayMarkers(filteredData); // 검색 결과에 해당하는 마커 표시
+  });
+
+  // 마커를 관리하는 배열
+  var markers = [];
+
+  // 모든 마커를 지우는 함수
+  function clearAllMarkers() {
+    markers.forEach(function (marker) {
+      marker.setMap(null);
+    });
+    markers = [];
+  }
+
+  // 검색 결과에 해당하는 마커를 표시하는 함수
+  function displayMarkers(data) {
+    data.forEach(function (info) {
+
+      markers.push(marker);
+    });
+  }
+</script>
+</body>
+</html>

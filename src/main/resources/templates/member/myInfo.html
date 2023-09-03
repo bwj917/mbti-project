@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+	<title>Timeline</title>
+	<link rel="stylesheet" href="/css/main.min.css" th:href="@{/css/main.min.css}">
+	<link rel="stylesheet" href="/css/style.css"  th:href="@{/css/style.css}">
+	<link rel="stylesheet" href="/css/color.css"  th:href="@{/css/color.css}">
+	<link rel="stylesheet" href="/css/responsive.css"  th:href="@{/css/reponsive.css}">
+
+</head>
+<body>
+<div th:insert="~{/header_login.html}"></div>
+<div class="theme-layout">
+	<section>
+	</section><!-- top area -->
+		
+	<section>
+		<div class="gap gray-bg">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="row" id="page-contents">
+							<div class="col-lg-3">
+								<aside class="sidebar static">
+									<div class="widget">
+										<h4 class="widget-title">Edit info</h4>
+										<ul class="naves">
+											<li>
+												<i class="ti-heart"></i>
+												<a title="" href="edit-interest.html">위시 리스트</a>
+											</li>
+											<li>
+												<i class="ti-info-alt"></i>
+												<a title="" href="mypage.html" th:href="@{/mypage}">내 정보</a>
+											</li>
+											<li>
+												<i class="ti-book"></i>
+												<a title="" href="myInfo.html" th:href="|@{/{loginId}/myInfo(loginId=${member.loginId})}|">정보 수정</a>
+											</li>
+										</ul>
+									</div>
+								</aside>
+							</div><!-- sidebar -->
+							<div class="col-lg-6">
+								<div class="central-meta">
+									<div class="editing-info">
+										<h5 class="f-title"><i class="ti-info-alt"></i>정보 수정</h5>
+										<form th:action th:object="${member}" method="post">
+											<div class="form-group half" >
+												<input type="text" required="required" th:field="*{loginId}">
+												<label class="control-label" >ID</label><i class="mtrl-select" ></i>
+											</div>
+											<div class="form-group half">
+												<input type="text" required="required" th:field="*{name}">
+												<label class="control-label" for="input">Name</label><i class="mtrl-select"></i>
+											</div>
+											<div class="form-group half">
+												<input type="text" required="required" th:field="*{nickName}">
+												<label class="control-label" for="input">닉네임</label><i class="mtrl-select"></i>
+											</div>
+											<div class="form-group">
+												<div class="form-group">
+													<input type="password" id="input" required="required" th:field="*{password}">
+													<label class="control-label" for="input" >New password</label><i class="mtrl-select" ></i>
+												</div>
+												<div class="form-group">
+													<input type="password" required="required" th:field="*{password2}">
+													<label class="control-label" for="input">Confirm password</label><i class="mtrl-select" ></i>
+												</div>
+											</div>
+											<div class="form-group">
+												<input type="text" th:field="*{phoneNumber}">
+												<label class="control-label" for="input">Phone No.</label><i class="mtrl-select"  ></i>
+											</div>
+											<div class="form-group">
+												<input type="text" th:field="*{email}">
+												<label class="control-label" for="input" >email</a></label><i class="mtrl-select" ></i>
+											</div>
+											<div class="form-group">
+												<select th:field="*{mbti}" >
+													<option value="">====MBTI====</option>
+													<option value="INTJ">INTJ</option>
+													<option value="INTP">INTP</option>
+													<option value="ENTJ">ENTJ</option>
+													<option value="ENTP">ENTP</option>
+													<option value="ESTJ">ESTJ</option>
+													<option value="ESFJ">ESFJ</option>
+													<option value="ISTJ">ISTJ</option>
+													<option value="ISFJ">ISFJ</option>
+													<option value="ENFP">ENFP</option>
+													<option value="ENFJ">ENFJ</option>
+													<option value="INFJ">INFJ</option>
+													<option value="INFP">INFP</option>
+													<option value="ESTP">ESTP</option>
+													<option value="ESFP">ESFP</option>
+													<option value="ISTP">ISTP</option>
+													<option value="ISFP">ISFP</option>
+												</select>
+											</div>
+											<div class="dob">
+												<div class="form-group">
+													<select>
+														<option value="Day">Day</option>
+														<option>1</option>
+														<option>2</option>
+														<option>3</option>
+														<option>4</option>
+														<option>5</option>
+														<option>6</option>
+														<option>7</option>
+														<option>8</option>
+														<option>9</option>
+														<option>10</option>
+														<option>11</option>
+														<option>12</option>
+														<option>13</option>
+														<option>14</option>
+														<option>15</option>
+														<option>16</option>
+														<option>17</option>
+														<option>18</option>
+														<option>19</option>
+														<option>20</option>
+														<option>21</option>
+														<option>22</option>
+														<option>23</option>
+														<option>24</option>
+														<option>25</option>
+														<option>26</option>
+														<option>27</option>
+														<option>28</option>
+														<option>29</option>
+														<option>30</option>
+														<option>31</option>
+													</select>
+												</div>
+												<div class="form-group">
+													<select>
+														<option value="month">Month</option>
+														<option>Jan</option>
+														<option>Feb</option>
+														<option>Mar</option>
+														<option>Apr</option>
+														<option>May</option>
+														<option>Jun</option>
+														<option>Jul</option>
+														<option>Aug</option>
+														<option>Sep</option>
+														<option>Oct</option>
+														<option>Nov</option>
+														<option>Dec</option>
+													</select>
+												</div>
+												<div class="form-group">
+													<select>
+														<option value="year">Year</option>
+														<option>2000</option>
+														<option>2001</option>
+														<option>2002</option>
+														<option>2004</option>
+														<option>2005</option>
+														<option>2006</option>
+														<option>2007</option>
+														<option>2008</option>
+														<option>2009</option>
+														<option>2010</option>
+														<option>2011</option>
+														<option>2012</option>
+													</select>
+												</div>
+											</div>
+											<div class="form-radio">
+												<div class="radio">
+													<label>
+														<input type="radio" checked="checked" name="radio"><i class="check-box"></i>Male
+													</label>
+												</div>
+												<div class="radio">
+													<label>
+														<input type="radio" name="radio"><i class="check-box"></i>Female
+													</label>
+												</div>
+											</div>
+											<div class="form-group">
+												<textarea rows="4" id="textarea"></textarea>
+												<label class="control-label" for="textarea">About Me</label><i class="mtrl-select"></i>
+											</div>
+											<div class="submit-btns">
+												<button type="button" class="mtr-btn" onclick="location.href='mypage.html'"
+														th:onclick="|location.href='@{/mypage}'|"><span >취소</span></button>
+												<button type="submit" class="mtr-btn"><span>완료</span></button>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div><!-- centerl meta -->
+						</div>	
+					</div>
+				</div>
+			</div>
+		</div>	
+	</section>
+</div>
+<div th:insert="~{footer.html}"></div>
+</body>	
+
+</html>

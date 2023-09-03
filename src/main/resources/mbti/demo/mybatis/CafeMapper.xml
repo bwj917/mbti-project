@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mbti.demo.mybatis.CafeMapper">
+    <resultMap id="cafeMap" type="Cafe">
+        <id property="name" column="카페" />
+        <result property="address" column="주소" />
+        <result property="picture" column="사진"/>
+    </resultMap>
+
+    <select id="getAllCafes" resultMap="cafeMap">
+        SELECT "카페", "주소",  "사진" FROM cafe
+    </select>
+    <select id="getAddress" resultMap="cafeMap">
+        SELECT "주소" FROM cafe
+    </select>
+</mapper>
